@@ -66,10 +66,20 @@ function ScatterPlot({
         },
       },
       tooltip: {
+        bodyFont: {
+          size: 16, // 툴팁 폰트 크기를 16으로 설정
+        },
         callbacks: {
           label: function (context: any) {
             const point = context.raw;
-            return `Call ID: ${point.callId}\nText: ${point.text}`;
+            const { text } = point;
+            return [
+              `Call ID: ${point.callId}`,
+              `Text: ${text.slice(0, 80)}`,
+              text.slice(80, 160),
+              text.slice(160, 240),
+              text.slice(240, 320),
+            ];
           },
         },
       },
