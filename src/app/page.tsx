@@ -32,7 +32,7 @@ export default async function Home({
           afterCallAction
         </Link>
       </div>
-      <h1 className="text-[24px]">벡터 임베딩 간 유사도 : {category}</h1>
+      <h1 className="text-[24px] mt-20">벡터 임베딩 간 유사도 : {category}</h1>
       <ScatterPlot data={json} />
     </main>
   );
