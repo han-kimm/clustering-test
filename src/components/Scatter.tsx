@@ -21,6 +21,7 @@ function ScatterPlot({
     cluster: number;
     callId: string;
     text: string;
+    common: string;
   }[];
 }) {
   const datasets = {
@@ -32,7 +33,7 @@ function ScatterPlot({
       .map((cluster) => {
         const points = data.filter((point) => point.cluster === cluster);
         return {
-          label: `Cluster ${cluster}`,
+          label: points[0].common,
           data: points.map((point) => ({
             x: point.x,
             y: point.y,
@@ -63,6 +64,9 @@ function ScatterPlot({
       legend: {
         labels: {
           color: "white", // 레이블 색상을 흰색으로 설정
+          font: {
+            size: 16, // 레이블 폰트 크기를 16으로 설정
+          },
         },
       },
       tooltip: {
