@@ -1,6 +1,8 @@
 import Feature from "@/components/Feature";
 import { getObject } from "@/utils/s3";
 
+export const dynamic = "force-dynamic";
+
 async function AMPage() {
   const json = await getObject("2024-07-09-feature.json");
 
