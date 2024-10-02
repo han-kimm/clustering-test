@@ -12,7 +12,7 @@ function Feature(props: { data: any }) {
   }>(null);
 
   return (
-    <div className="flex gap-8 h-3/5">
+    <div className="flex w-full h-5/6 gap-8 mt-8">
       <ul className="flex flex-col gap-4 max-h-screen overflow-y-auto shrink-0">
         {data.map((item: any) => (
           <li
@@ -27,7 +27,7 @@ function Feature(props: { data: any }) {
         ))}
       </ul>
       {selected && (
-        <div className="bg-white rounded-md p-4 h-dvh overflow-y-auto">
+        <div className="bg-white rounded-md p-4 h-full overflow-y-auto">
           <label className="text-black font-bold text-[20px]">Summary</label>
           <p className="bg-gray-100 p-4 text-black mb-8 whitespace-break-spaces">
             {selected.feature}
