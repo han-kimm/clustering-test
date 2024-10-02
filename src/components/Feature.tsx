@@ -18,8 +18,10 @@ function Feature(props: { data: any }) {
           <li
             onClick={() => setSelected(item)}
             key={item.email}
-            className={`bg-white text-black rounded-md p-4 ${
-              selected?.email === item.email ? "bg-blue-700 text-white" : ""
+            className={`rounded-md p-4 ${
+              selected?.email === item.email
+                ? "bg-blue-700 text-white"
+                : "bg-white text-black"
             } ${item.violation.length ? "border-4 border-blue-700" : ""}`}
           >
             {item.email}
