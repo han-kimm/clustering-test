@@ -8,7 +8,9 @@ async function AMPage() {
 
   return (
     <div className="h-dvh w-dvw bg-gray-100 p-4 text-blue-700 text-blue-700">
-      <h1 className="font-bold text-[28px]">AM Characteristic Analysis</h1>
+      <div className="flex gap-12 items-center">
+        <h1 className="font-bold text-[28px]">AM Characteristic Analysis</h1>
+      </div>
       <Feature data={json} />
     </div>
   );

@@ -1804,6 +1804,11 @@ chartjs-color@^2.1.0:
     chartjs-color-string "^0.6.0"
     color-convert "^1.9.3"
 
+chartjs-plugin-datalabels@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/chartjs-plugin-datalabels/-/chartjs-plugin-datalabels-2.2.0.tgz#369578e131d743c2e34b5fbe2d3f9335f6639b8f"
+  integrity sha512-14ZU30lH7n89oq+A4bWaJPnAG8a7ZTk7dKf48YAzMvJjQtjrgg5Dpk9f+LbjCF6bpx3RAGTeL13IXpKQYyRvlw==
+
 chartjs-plugin-select@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/chartjs-plugin-select/-/chartjs-plugin-select-0.2.1.tgz#ec86e0ec66db5b7f4e111586b36eb0fa195d97cf"

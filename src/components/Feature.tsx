@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import DoughnutChart from "./Donut";
 
 function Feature(props: { data: any }) {
   const { data } = props;
@@ -10,6 +11,23 @@ function Feature(props: { data: any }) {
     characteristic: [];
     violation: [];
   }>(null);
+
+  const violatedAM = data.filter((d: any) => d.violation.length);
+  const violated = violatedAM.length;
+  const percentage = Math.floor((violated / data.length) * 100);
+
+  const violations = violatedAM.reduce((acc: any, cur: any) => {
+    cur.violation.forEach((v: any) => {
+      if (acc[v.name]) {
+        acc[v.name] += 1;
+      } else {
+        acc[v.name] = 1;
+      }
+    });
+    return acc;
+  }, {});
+
+  const top3 = Object.entries(violations).sort((a: any, b: any) => b[1] - a[1]);
 
   return (
     <div className="flex w-full h-5/6 gap-8 mt-8">
@@ -28,7 +46,7 @@ function Feature(props: { data: any }) {
           </li>
         ))}
       </ul>
-      {selected && (
+      {selected ? (
         <div className="bg-white rounded-md p-4 h-full overflow-y-auto">
           <label className="text-black font-bold text-[20px]">Summary</label>
           <p className="bg-gray-100 p-4 text-black mb-8 whitespace-break-spaces">
@@ -79,6 +97,34 @@ function Feature(props: { data: any }) {
               </li>
             )}
           </ul>
+        </div>
+      ) : (
+        <div className="flex gap-12 bg-white p-8 rounded-md w-full">
+          <div>
+            <label className="text-black font-bold text-[20px]">
+              Violating AM Count
+            </label>
+            <DoughnutChart count={violated} entire={data.length} />
+            <p className="text-black text-[20px] text-center mt-8">
+              {percentage}%
+            </p>
+          </div>
+          <div className="w-full">
+            <label className="text-black font-bold text-[20px]">
+              Violation
+            </label>
+            <ul className="flex flex-col gap-4 h-full overflow-y-auto w-full">
+              {top3.map((t: any, i: number) => (
+                <li
+                  key={i}
+                  className="font-bold text-black p-4 bg-gray-100 flex justify-between"
+                >
+                  {t[0]}
+                  <span className="text-blue-700 text-[20px]"> {t[1]}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       )}
     </div>
