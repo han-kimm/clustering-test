@@ -7,11 +7,18 @@ function Feature(props: { data: any }) {
   const { data } = props;
   const [selected, setSelected] = useState<null | {
     email: string;
-    feature: string;
+    feature: {
+      overall: { keyword: string[]; content: string };
+      strength: { keyword: string[]; content: string };
+      pitfall: { keyword: string[]; content: string };
+      improvement: { keyword: string[]; content: string };
+      speech: string[];
+    };
     characteristic: [];
     violation: [];
   }>(null);
-  const selectedFeature = JSON.parse(selected?.feature ?? "{}");
+
+  const selectedFeature = selected?.feature ?? ({} as any);
 
   const violatedAM = data.filter((d: any) => d.violation.length);
   const violated = violatedAM.length;
@@ -48,7 +55,7 @@ function Feature(props: { data: any }) {
         ))}
       </ul>
       {selected ? (
-        <div className="h-full overflow-y-auto flex flex-col gap-8">
+        <div className="h-full w-full overflow-y-auto flex flex-col gap-8">
           <div className="bg-white rounded-md p-4">
             <label className="text-black font-bold text-[24px]">
               AI Report
