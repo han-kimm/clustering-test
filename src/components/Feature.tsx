@@ -75,6 +75,17 @@ function Feature(props: { data: any }) {
                 <p className="text-black">{selectedFeature[label].content}</p>
               </div>
             ))}
+            <label className="text-black font-bold">Recommended Speech</label>
+            <div className="flex flex-col gap-4">
+              {selectedFeature.speech.map((item: any, index: number) => (
+                <div key={index} className="flex gap-4 items-start">
+                  <span className="text-black p-4">{index + 1}</span>
+                  <span className="bg-gray-100 text-black p-2 rounded-md mr-2 mt-2">
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="bg-white rounded-md p-4 h-full">
             <label className="text-black font-bold text-[24px]">
