@@ -53,7 +53,7 @@ function Feature(props: { data: any }) {
             <label className="text-black font-bold text-[24px]">
               AI Report
             </label>
-            {["overall", "good", "bad", "improvement"].map((label) => (
+            {["overall", "strength", "pitfall", "improvement"].map((label) => (
               <div key={label} className="flex flex-col gap-4 mb-8">
                 <div>
                   <label className="text-black font-bold text-[20px]">
