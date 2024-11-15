@@ -130,9 +130,9 @@ const StageComparison = () => {
       </h2>
       <p>
         Group 1(Deal은 많이 가져오지만 Docusign Conversion은 유독 낮은 인원)
-        Group 2(근무 일수 대비 Deal을 못가져오는 유형) Group 3(Docusign
-        Conversion은 유독 높은 인원)
       </p>
+      <p>Group 2(근무 일수 대비 Deal을 못가져오는 유형)</p>
+      <p>Group 3(Docusign Conversion은 유독 높은 인원)</p>
       <span>분석 모델: gpt-4o-mini</span>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
@@ -141,7 +141,7 @@ const StageComparison = () => {
             top: 20,
             right: 30,
             left: 20,
-            bottom: 60,
+            bottom: 100,
           }}
         >
           <CartesianGrid />
@@ -156,21 +156,9 @@ const StageComparison = () => {
           {/* @ts-ignore */}
           <Tooltip content={<CustomTooltip />} />
           <Legend />
-          <Bar
-            dataKey="Group 1 Percentage"
-            name="Group 1(Deal은 많이 가져오지만 Docusign Conversion은 유독 낮은 인원)"
-            fill="#8884d8"
-          />
-          <Bar
-            dataKey="Group 2 Percentage"
-            name="Group 2(근무 일수 대비 Deal을 못가져오는 유형)"
-            fill="#82ca9d"
-          />
-          <Bar
-            dataKey="Group 3 Percentage"
-            name="Group 3(Docusign Conversion은 유독 높은 인원)"
-            fill="#ffc658"
-          />
+          <Bar dataKey="Group 1 Percentage" name="Group 1" fill="#8884d8" />
+          <Bar dataKey="Group 2 Percentage" name="Group 2" fill="#82ca9d" />
+          <Bar dataKey="Group 3 Percentage" name="Group 3" fill="#ffc658" />
         </BarChart>
       </ResponsiveContainer>
     </div>
