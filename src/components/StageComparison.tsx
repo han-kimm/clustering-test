@@ -128,6 +128,11 @@ const StageComparison = () => {
       <h2 className="text-xl font-bold text-center mb-4">
         Sales Funnel별 분포
       </h2>
+      <p>
+        Group 1(Deal은 많이 가져오지만 Docusign Conversion은 유독 낮은 인원)
+        Group 2(근무 일수 대비 Deal을 못가져오는 유형) Group 3(Docusign
+        Conversion은 유독 높은 인원)
+      </p>
       <span>분석 모델: gpt-4o-mini</span>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
