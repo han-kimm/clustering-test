@@ -11,10 +11,8 @@ function Scatter3D({
     x: number;
     y: number;
     z: number; // z 축 데이터 추가
-    cluster: number;
-    callId: string;
     text: string;
-    common: string;
+    group: string;
   }[];
 }) {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -63,7 +61,7 @@ function Scatter3D({
     data.forEach((point) => {
       const geometry = new THREE.SphereGeometry(0.3, 32, 32);
       const material = new THREE.MeshBasicMaterial({
-        color: `hsl(${point.cluster * 20}, 100%, 50%)`,
+        color: `hsl(${point.group.at(-1) ?? 1 * 20}, 100%, 50%)`,
       });
       const sphere = new THREE.Mesh(geometry, material);
       sphere.position.set(point.x, point.y, point.z);

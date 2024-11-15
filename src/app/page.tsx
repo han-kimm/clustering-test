@@ -1,9 +1,13 @@
 import BarChart from "@/components/Bar";
 import { ScatterPlot } from "@/components/Scatter";
 import { Scatter3D } from "@/components/Scatter3D";
+import { Scatter3DTranscript } from "@/components/Scatter3DTranscript";
 import { ScatterSentence } from "@/components/ScatterSentence";
+import { ScatterTranscript } from "@/components/ScatterTranscript";
 import { getObject } from "@/utils/s3";
 import Link from "next/link";
+
+export const dynamic = "force-dynamic";
 
 export default async function Home({
   searchParams,
@@ -12,8 +16,6 @@ export default async function Home({
 }) {
   const { category } = searchParams;
   const json = await getObject(category + ".json");
-
-  console.log(json);
 
   return (
     <main className="flex min-h-screen items-center justify-between">
@@ -163,6 +165,10 @@ export default async function Home({
           <h2 className="text-[18px] mt-4">표본 개수: {json.length}</h2>
           {category.includes("sentence") ? (
             <ScatterSentence data={json} />
+          ) : category.includes("3d") ? (
+            <Scatter3DTranscript data={json} />
+          ) : category.includes("tsne") ? (
+            <ScatterTranscript data={json} />
           ) : (
             <ScatterPlot data={json} />
           )}
