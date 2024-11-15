@@ -10,7 +10,6 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  Label,
 } from "recharts";
 
 const StageComparison = () => {
@@ -25,15 +24,6 @@ const StageComparison = () => {
       "Group 3 Count": 221,
     },
     {
-      stage: "GKConnected",
-      "Group 1 Percentage": 28.0,
-      "Group 1 Count": 769,
-      "Group 2 Percentage": 40.1,
-      "Group 2 Count": 910,
-      "Group 3 Percentage": 30.4,
-      "Group 3 Count": 697,
-    },
-    {
       stage: "ARS",
       "Group 1 Percentage": 64.7,
       "Group 1 Count": 1777,
@@ -41,6 +31,15 @@ const StageComparison = () => {
       "Group 2 Count": 1222,
       "Group 3 Percentage": 55.7,
       "Group 3 Count": 1278,
+    },
+    {
+      stage: "GKConnected",
+      "Group 1 Percentage": 28.0,
+      "Group 1 Count": 769,
+      "Group 2 Percentage": 40.1,
+      "Group 2 Count": 910,
+      "Group 3 Percentage": 30.4,
+      "Group 3 Count": 697,
     },
     {
       stage: "DMConnected",
@@ -125,7 +124,11 @@ const StageComparison = () => {
   };
 
   return (
-    <div className="w-full h-96 p-4">
+    <div className="w-full h-[600px] p-4">
+      <h2 className="text-xl font-bold text-center mb-4">
+        Sales Funnel별 분포
+      </h2>
+      <span>분석 모델: gpt-4o-mini</span>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
@@ -133,7 +136,7 @@ const StageComparison = () => {
             top: 20,
             right: 30,
             left: 20,
-            bottom: 5,
+            bottom: 60,
           }}
         >
           <CartesianGrid />
