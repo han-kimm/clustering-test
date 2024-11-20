@@ -12,7 +12,13 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const StageComparison = ({ data }: { data: any[] }) => {
+const PatternComparison = (props: {
+  title: string;
+  data: any;
+  description?: string;
+  domain?: number[];
+}) => {
+  const { title, data, description, domain } = props;
   const CustomTooltip = ({
     active,
     payload,
@@ -31,7 +37,7 @@ const StageComparison = ({ data }: { data: any[] }) => {
               entry.name.split(" ")[0] + " " + entry.name.split(" ")[1];
             const countKey = `${groupName} Count`;
             // @ts-ignore
-            const count = data.find((item) => item.stage === label)[countKey];
+            const count = data.find((item) => item.stage === label)?.[countKey];
             return (
               <p
                 key={entry.name}
@@ -49,10 +55,8 @@ const StageComparison = ({ data }: { data: any[] }) => {
   };
 
   return (
-    <div className="w-full h-[600px] p-4">
-      <h2 className="text-xl font-bold text-center mb-4">
-        Sales Funnel별 분포
-      </h2>
+    <div className="w-full h-[1000px] p-4 bg-white pb-[300px]">
+      <h2 className="text-[28px] font-bold text-center mb-4">{title}</h2>
       <div className="flex gap-4">
         <p className="text-[12px] bg-[#8884d8] rounded-lg p-2 inline-block">
           Group 1(Deal은 많이 가져오지만 Docusign Conversion은 유독 낮은 인원)
@@ -65,7 +69,7 @@ const StageComparison = ({ data }: { data: any[] }) => {
         </p>
       </div>
       <span className="text-[12px]">분석 모델: gpt-4o-mini</span>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="90%">
         <BarChart
           data={data}
           margin={{
@@ -75,7 +79,7 @@ const StageComparison = ({ data }: { data: any[] }) => {
             bottom: 100,
           }}
         >
-          <CartesianGrid />
+          <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="stage" angle={-45} textAnchor="end" height={100} />
           <YAxis
             label={{
@@ -83,9 +87,13 @@ const StageComparison = ({ data }: { data: any[] }) => {
               angle: -90,
               position: "insideLeft",
             }}
+            domain={domain}
           />
           {/* @ts-ignore */}
           <Tooltip content={<CustomTooltip />} />
+          <Bar dataKey="Group 1 Percentage" name="Group 1" fill="#8884d8" />
+          <Bar dataKey="Group 2 Percentage" name="Group 2" fill="#82ca9d" />
+          <Bar dataKey="Group 3 Percentage" name="Group 3" fill="#ffc658" />
           <Legend
             verticalAlign="top"
             align="right"
@@ -93,13 +101,15 @@ const StageComparison = ({ data }: { data: any[] }) => {
               paddingBottom: "20px",
             }}
           />
-          <Bar dataKey="Group 1 Percentage" name="Group 1" fill="#8884d8" />
-          <Bar dataKey="Group 2 Percentage" name="Group 2" fill="#82ca9d" />
-          <Bar dataKey="Group 3 Percentage" name="Group 3" fill="#ffc658" />
         </BarChart>
       </ResponsiveContainer>
+      {!!description && (
+        <p className="text-[20px] bg-gray-100 rounded-md text-center whitespace-pre-line mb-4 p-2">
+          {description}
+        </p>
+      )}
     </div>
   );
 };
 
-export default StageComparison;
+export default PatternComparison;

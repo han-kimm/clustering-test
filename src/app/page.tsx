@@ -1,6 +1,5 @@
 import BarChart from "@/components/Bar";
 import { ScatterPlot } from "@/components/Scatter";
-import { Scatter3D } from "@/components/Scatter3D";
 import { Scatter3DTranscript } from "@/components/Scatter3DTranscript";
 import { ScatterSentence } from "@/components/ScatterSentence";
 import { ScatterTranscript } from "@/components/ScatterTranscript";
