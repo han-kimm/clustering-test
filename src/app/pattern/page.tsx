@@ -328,21 +328,12 @@ function PatternPage() {
     },
     {
       stage: "Invoice Request Pattern",
-      "Group 1 Count": 11,
-      "Group 2 Count": 15,
-      "Group 3 Count": 47,
-      "Group 1 Percentage": ((11 / 877) * 100).toFixed(1),
-      "Group 2 Percentage": ((15 / 973) * 100).toFixed(1),
-      "Group 3 Percentage": ((47 / 836) * 100).toFixed(1),
-    },
-    {
-      stage: "Quote Request Pattern",
-      "Group 1 Count": 28,
-      "Group 2 Count": 22,
-      "Group 3 Count": 50,
-      "Group 1 Percentage": ((28 / 877) * 100).toFixed(1),
-      "Group 2 Percentage": ((22 / 973) * 100).toFixed(1),
-      "Group 3 Percentage": ((50 / 836) * 100).toFixed(1),
+      "Group 1 Count": 39,
+      "Group 2 Count": 37,
+      "Group 3 Count": 97,
+      "Group 1 Percentage": ((39 / 877) * 100).toFixed(1),
+      "Group 2 Percentage": ((37 / 973) * 100).toFixed(1),
+      "Group 3 Percentage": ((97 / 836) * 100).toFixed(1),
     },
     {
       stage: "Follow-up Pattern(After Quote)",
@@ -500,11 +491,17 @@ function PatternPage() {
       <PatternComparison
         title="Referral"
         data={referralData}
+        description={
+          "*Group 3*은 Not Interested가 가장 적으면서, Sales Speech Referral이 가장 높음\nNot Interested = 아예 관심 없어요. = 추가 영업 시도 어려움\nSales Referral = 지금도 충분해요. = 추가 영업 시도 가능"
+        }
         domain={[0, 20]}
       />
       <PatternComparison
         title="Contact Information"
         data={contactData}
+        description={
+          "Schedule Follow-up = 다시 연락할 시간 정하는 패턴(follow-up call 연관)\n Email Request = 이메일 주소 요청 패턴(quote, invoice 등 문서 연관)\n Callback number Request = 전화번호 요청 패턴(follow-up call 연관)"
+        }
         domain={[0, 30]}
       />
     </div>
