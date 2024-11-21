@@ -6,6 +6,12 @@ import Link from "next/link";
 function PatternPage() {
   const patterns = [
     {
+      name: "Request to Speak with Manager Pattern",
+      conversation: [
+        ["Caller", "May I speak with the owner/manager/person in charge?"],
+      ],
+    },
+    {
       name: "Manager Available Pattern - Direct",
       conversation: [
         ["Caller", "May I speak with the owner/manager/person in charge?"],
