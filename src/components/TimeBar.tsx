@@ -1,14 +1,8 @@
+// components/TimeBar.tsx
 "use client";
 
 import { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
-
-interface GroupData {
-  time: string;
-  group1: number;
-  group2: number;
-  group3: number;
-}
 
 // 시간대 순서대로 정렬하기 위한 함수
 const sortTimeStrings = (a: string, b: string) => {
@@ -19,7 +13,7 @@ const sortTimeStrings = (a: string, b: string) => {
 
 // 데이터 정렬 및 구성
 const generateSortedData = () => {
-  const times = [
+  const times = new Set([
     "8:00",
     "8:30",
     "9:00",
@@ -36,9 +30,9 @@ const generateSortedData = () => {
     "14:30",
     "15:00",
     "15:30",
-  ] as const;
+  ]);
 
-  const group1Data = {
+  const group1Data: Record<string, number> = {
     "8:00": 19,
     "8:30": 64,
     "9:00": 52,
@@ -57,7 +51,7 @@ const generateSortedData = () => {
     "15:30": 55,
   };
 
-  const group2Data = {
+  const group2Data: Record<string, number> = {
     "8:00": 45,
     "8:30": 64,
     "9:00": 66,
@@ -76,7 +70,7 @@ const generateSortedData = () => {
     "15:30": 64,
   };
 
-  const group3Data = {
+  const group3Data: Record<string, number> = {
     "8:00": 55,
     "8:30": 62,
     "9:00": 62,
@@ -97,12 +91,24 @@ const generateSortedData = () => {
 
   return Array.from(times)
     .sort(sortTimeStrings)
-    .map((time) => ({
-      time,
-      group1: group1Data[time] || 0,
-      group2: group2Data[time] || 0,
-      group3: group3Data[time] || 0,
-    }));
+    .map((time) => {
+      const total =
+        (group1Data[time] || 0) +
+        (group2Data[time] || 0) +
+        (group3Data[time] || 0);
+      return {
+        time,
+        group1Percent: total
+          ? Number((((group1Data[time] || 0) / total) * 100).toFixed(1))
+          : 0,
+        group2Percent: total
+          ? Number((((group2Data[time] || 0) / total) * 100).toFixed(1))
+          : 0,
+        group3Percent: total
+          ? Number((((group3Data[time] || 0) / total) * 100).toFixed(1))
+          : 0,
+      };
+    });
 };
 
 const TimeBar = () => {
@@ -120,30 +126,42 @@ const TimeBar = () => {
 
       if (ctx) {
         chartInstance.current = new Chart(ctx, {
-          type: "bar",
+          type: "line",
           data: {
             labels: sortedData.map((item) => item.time),
             datasets: [
               {
                 label: "Group 1",
-                data: sortedData.map((item) => item.group1),
-                backgroundColor: "rgba(136, 132, 216, 0.6)", // #8884d8
+                data: sortedData.map((item) => item.group1Percent),
                 borderColor: "#8884d8",
-                borderWidth: 1,
+                backgroundColor: "rgba(136, 132, 216, 0.1)",
+                borderWidth: 2,
+                tension: 0.3,
+                fill: true,
+                pointRadius: 4,
+                pointBackgroundColor: "#8884d8",
               },
               {
                 label: "Group 2",
-                data: sortedData.map((item) => item.group2),
-                backgroundColor: "rgba(130, 202, 157, 0.6)", // #82ca9d
+                data: sortedData.map((item) => item.group2Percent),
                 borderColor: "#82ca9d",
-                borderWidth: 1,
+                backgroundColor: "rgba(130, 202, 157, 0.1)",
+                borderWidth: 2,
+                tension: 0.3,
+                fill: true,
+                pointRadius: 4,
+                pointBackgroundColor: "#82ca9d",
               },
               {
                 label: "Group 3",
-                data: sortedData.map((item) => item.group3),
-                backgroundColor: "rgba(255, 198, 88, 0.6)", // #ffc658
+                data: sortedData.map((item) => item.group3Percent),
                 borderColor: "#ffc658",
-                borderWidth: 1,
+                backgroundColor: "rgba(255, 198, 88, 0.1)",
+                borderWidth: 2,
+                tension: 0.3,
+                fill: true,
+                pointRadius: 4,
+                pointBackgroundColor: "#ffc658",
               },
             ],
           },
@@ -152,9 +170,9 @@ const TimeBar = () => {
             plugins: {
               title: {
                 display: true,
-                text: "Call Count (Half Hour)",
+                text: "Call Distribution by Half Hour",
                 font: {
-                  size: 16,
+                  size: 28,
                   weight: "bold",
                 },
                 padding: 20,
@@ -163,12 +181,18 @@ const TimeBar = () => {
                 position: "top" as const,
                 labels: {
                   padding: 20,
+                  usePointStyle: true,
+                  pointStyle: "circle",
                 },
               },
               tooltip: {
+                mode: "index",
+                intersect: false,
                 callbacks: {
                   label: function (context) {
-                    return `${context.dataset.label}: ${context.parsed.y}`;
+                    return `${
+                      context.dataset.label
+                    }: ${context.parsed.y.toFixed(1)}%`;
                   },
                 },
               },
@@ -177,22 +201,26 @@ const TimeBar = () => {
               x: {
                 title: {
                   display: true,
-                  text: "Time",
+                  text: "Time(Half Hour)",
                   font: {
+                    size: 16,
                     weight: "bold",
                   },
                   padding: { top: 10 },
                 },
                 grid: {
-                  display: false,
+                  display: true,
+                  color: "rgba(0, 0, 0, 0.05)",
                 },
               },
               y: {
-                beginAtZero: true,
+                min: 0,
+                max: 60,
                 title: {
                   display: true,
-                  text: "Count",
+                  text: "Occupied (%)",
                   font: {
+                    size: 16,
                     weight: "bold",
                   },
                   padding: { bottom: 10 },
@@ -200,7 +228,17 @@ const TimeBar = () => {
                 grid: {
                   color: "rgba(0, 0, 0, 0.1)",
                 },
+                ticks: {
+                  callback: function (value) {
+                    return value + "%";
+                  },
+                },
               },
+            },
+            interaction: {
+              mode: "nearest",
+              axis: "x",
+              intersect: false,
             },
             maintainAspectRatio: false,
           },
