@@ -150,7 +150,9 @@ function ScatterTranscript({
             console.log(context.raw);
             return stage
               ? [`Stage: ${stage}`, `Transcript: ${text}`]
-              : [`Patterns: ${pattern.join(`\n`)}`, `Transcript: ${text}`];
+              : pattern
+              ? [`Patterns: ${pattern.join(`\n`)}`, `Transcript: ${text}`]
+              : [`Sentence: ${text}`];
           },
         },
       },

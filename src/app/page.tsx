@@ -162,9 +162,7 @@ export default async function Home({
         <div className="flex-1 items-center flex flex-col">
           <h1 className="text-[24px] mt-20">벡터 임베딩</h1>
           <h2 className="text-[18px] mt-4">표본 개수: {json.length}</h2>
-          {category.includes("sentence") ? (
-            <ScatterSentence data={json} />
-          ) : category.includes("3d") ? (
+          {category.includes("3d") ? (
             <Scatter3DTranscript data={json} />
           ) : category.includes("tsne") ? (
             <ScatterTranscript data={json} />
