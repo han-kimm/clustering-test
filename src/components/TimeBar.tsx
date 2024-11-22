@@ -89,23 +89,32 @@ const generateSortedData = () => {
     "15:30": 27,
   };
 
+  const group1Count = Object.values(group1Data).reduce(
+    (acc, value) => acc + value,
+    0
+  );
+  const group2Count = Object.values(group2Data).reduce(
+    (acc, value) => acc + value,
+    0
+  );
+  const group3Count = Object.values(group3Data).reduce(
+    (acc, value) => acc + value,
+    0
+  );
+
   return Array.from(times)
     .sort(sortTimeStrings)
     .map((time) => {
-      const total =
-        (group1Data[time] || 0) +
-        (group2Data[time] || 0) +
-        (group3Data[time] || 0);
       return {
         time,
-        group1Percent: total
-          ? Number((((group1Data[time] || 0) / total) * 100).toFixed(1))
+        group1Percent: group1Count
+          ? Number((((group1Data[time] || 0) / group1Count) * 100).toFixed(1))
           : 0,
-        group2Percent: total
-          ? Number((((group2Data[time] || 0) / total) * 100).toFixed(1))
+        group2Percent: group2Count
+          ? Number((((group2Data[time] || 0) / group2Count) * 100).toFixed(1))
           : 0,
-        group3Percent: total
-          ? Number((((group3Data[time] || 0) / total) * 100).toFixed(1))
+        group3Percent: group3Count
+          ? Number((((group3Data[time] || 0) / group3Count) * 100).toFixed(1))
           : 0,
       };
     });
@@ -215,7 +224,7 @@ const TimeBar = () => {
               },
               y: {
                 min: 0,
-                max: 60,
+                max: 10,
                 title: {
                   display: true,
                   text: "Occupied (%)",
