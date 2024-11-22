@@ -270,7 +270,9 @@ const StateAnalytics = () => {
 
   return (
     <div className="w-full p-4 bg-gray-50">
-      <h2 className="text-2xl font-bold mb-6">State-Based Market Analysis</h2>
+      <h2 className="text-[28px] font-bold mb-6 text-center">
+        Speech Outside Variable Dashboard
+      </h2>
 
       <div className="space-y-8">
         <div className="bg-white rounded-lg shadow p-4">
