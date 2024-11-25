@@ -137,7 +137,7 @@ const StateAnalytics = () => {
 
     Object.entries(rawData).forEach(([groupName, groupData]) => {
       Object.entries(groupData.market).forEach(([market, value]) => {
-        const v = Number((value * 100).toFixed(1));
+        const v = value * 100;
         const state = MARKET_STATE_MAPPING[market];
         if (state) {
           if (!stateData[state]) {
@@ -161,6 +161,10 @@ const StateAnalytics = () => {
       .sort((a, b) => b.total - a.total)
       .map((state) => ({
         ...state,
+        Group1: state.Group1.toFixed(1),
+        Group2: state.Group2.toFixed(1),
+        Group3: state.Group3.toFixed(1),
+        total: state.total.toFixed(1),
         markets: Array.from(state.markets).join(", "),
       }));
   };
@@ -306,6 +310,10 @@ const StateAnalytics = () => {
               </div>
             ))}
           </div>
+          <p className="text-[20px] bg-gray-100 rounded-md text-center whitespace-pre-line mb-4 p-2">
+            Group 1 : Texas <br /> Group 2 : Kentucky
+            <br /> Group 3 : Florida
+          </p>
         </div>
       </div>
     </div>

@@ -426,19 +426,31 @@ const AdditionalComparison = () => {
       <div className="space-y-8">
         <div className="bg-white rounded-lg shadow">
           <ComparisonBarChart
-            title="Market Distribution Comparison"
+            title="City Distribution Comparison"
             type="market"
           />
         </div>
+        <p className="text-[20px] bg-gray-100 rounded-md text-center whitespace-pre-line mb-4 p-2">
+          Group 1 : Pittsburgh <br /> Group 2 : Austin
+          <br /> Group 3 : Miami
+        </p>
         <div className="bg-white rounded-lg shadow">
           <ComparisonBarChart
             title="Status Distribution Comparison"
             type="status"
           />
         </div>
+        <p className="text-[20px] bg-gray-100 rounded-md text-center whitespace-pre-line mb-4 p-2">
+          Group 1 : VoiceMail 1 <br /> Group 2 : New
+          <br /> Group 3 : Got Invoice
+        </p>
         <div className="bg-white rounded-lg shadow">
           <CategoryPieCharts />
         </div>
+        <p className="text-[20px] bg-gray-100 rounded-md text-center whitespace-pre-line mb-4 p-2">
+          Group 1 : Fresh Lead <br /> Group 2 : Live Lead
+          <br /> Group 3 : Live Lead
+        </p>
       </div>
     </div>
   );
