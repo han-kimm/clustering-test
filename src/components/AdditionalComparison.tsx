@@ -14,6 +14,8 @@ import {
   Pie,
   Cell,
 } from "recharts";
+import CityComparisonChart from "./NotInterestedCity";
+import Group3Top3City from "./Group3Top3";
 
 // 데이터 정의
 const groupData: Record<string, Record<string, Record<string, number>>> = {
@@ -430,10 +432,9 @@ const AdditionalComparison = () => {
             type="market"
           />
         </div>
-        <p className="text-[20px] bg-gray-100 rounded-md text-center whitespace-pre-line mb-4 p-2">
-          Group 1 : Pittsburgh <br /> Group 2 : Austin
-          <br /> Group 3 : Miami
-        </p>
+        <CityComparisonChart />
+        <Group3Top3City />
+
         <div className="bg-white rounded-lg shadow">
           <ComparisonBarChart
             title="Status Distribution Comparison"

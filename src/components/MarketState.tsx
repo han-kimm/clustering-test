@@ -14,6 +14,7 @@ import {
   Pie,
   Cell,
 } from "recharts";
+import CityComparisonChart from "./NotInterestedCity";
 
 // 시장-주 매핑 데이터
 const MARKET_STATE_MAPPING: Record<string, string> = {

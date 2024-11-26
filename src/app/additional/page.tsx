@@ -2,6 +2,7 @@ import { AdditionalComparison } from "@/components/AdditionalComparison";
 import { LocalTimeBar } from "@/components/LocalTimeBar";
 import StateAnalytics from "@/components/MarketState";
 import { NewTimeBar } from "@/components/NewTimeBar";
+import CityComparisonChart from "@/components/NotInterestedCity";
 import { StaffTimeBar } from "@/components/StaffTimeBar";
 import { TimeBar } from "@/components/TimeBar";
 
