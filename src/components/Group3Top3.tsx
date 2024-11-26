@@ -13,7 +13,7 @@ import {
 const Group3Top3City = () => {
   const [selectedPatterns, setSelectedPatterns] = useState([
     "Not Interested Response Pattern",
-    "Sales Referral Pattern",
+    "Sales Refusal Pattern",
   ]);
 
   const data = {
@@ -29,12 +29,12 @@ const Group3Top3City = () => {
       "Not Interested Response Pattern": 17.7,
       "Competitive Price Pattern": 11.3,
       "Service Size Verification Pattern": 3.7,
-      "Sales Referral Pattern": 3.7,
+      "Sales Refusal Pattern": 3.7,
       "Language Barrier Pattern": 2.5,
-      "Corporate Referral Pattern": 3.7,
+      "Corporate Refusal Pattern": 3.7,
       "Follow-up Pattern": 3.7,
       "Invoice Request Pattern": 7.5,
-      "City/National Referral Pattern": 1.2,
+      "City/National Refusal Pattern": 1.2,
     },
     Dallas: {
       "Manager Unavailable Pattern": 43.0,
@@ -52,21 +52,21 @@ const Group3Top3City = () => {
       "Not Interested Response Pattern": 15.1,
       "Invoice Request Pattern": 10.4,
       "Service Switch Pattern": 3.4,
-      "Sales Referral Pattern": 8.1,
-      "Corporate Referral Pattern": 3.4,
+      "Sales Refusal Pattern": 8.1,
+      "Corporate Refusal Pattern": 3.4,
       "Service Inquiry Pattern": 1.1,
     },
     Miami: {
       "Request to Speak with Manager Pattern": 52.4,
       "Not Interested Response Pattern": 7.4,
-      "Sales Referral Pattern": 1.8,
+      "Sales Refusal Pattern": 1.8,
       "Schedule Follow-up Pattern": 30.8,
       "Manager Unavailable Pattern": 58.0,
       "Current Service inquiry Pattern": 8.6,
       "Competitive Price Pattern": 6.1,
       "Service Size Verification Pattern": 6.7,
       "Email Request Pattern": 17.2,
-      "Corporate Referral Pattern": 1.2,
+      "Corporate Refusal Pattern": 1.2,
       "Language Barrier Pattern": 6.1,
       "Callback number Request Pattern": 8.0,
       "Follow-up Pattern": 7.4,
@@ -95,6 +95,7 @@ const Group3Top3City = () => {
   return (
     <div className="w-full">
       <div className="mb-4">
+        <h1 className="text-[28px]">Top 3 City (Group 3)</h1>
         <h3 className="text-sm font-medium mb-2">
           Select Patterns to Display:
         </h3>
