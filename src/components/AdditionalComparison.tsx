@@ -348,7 +348,7 @@ const ComparisonBarChart = ({
 
   return (
     <div className="w-full p-4">
-      <h3 className="text-lg font-semibold mb-4">{title}</h3>
+      <h3 className="text-[28px] font-semibold mb-4">{title}</h3>
       <div className="h-96">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data}>
@@ -385,9 +385,7 @@ const CategoryPieCharts = () => {
 
   return (
     <div className="w-full p-4">
-      <h3 className="text-lg font-semibold mb-4">
-        Category Distribution Comparison
-      </h3>
+      <h3 className="text-[28px] font-semibold mb-4">Lead Type Comparison</h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {Object.entries(groupData).map(([groupName, data], index) => (
           <div key={groupName} className="h-64">

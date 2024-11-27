@@ -95,7 +95,9 @@ const Group3Top3City = () => {
   return (
     <div className="w-full">
       <div className="mb-4">
-        <h1 className="text-[28px]">Top 3 City (Group 3)</h1>
+        <h1 className="text-[28px] font-semibold">
+          Pattern of Call count Top 3 City (Group 3)
+        </h1>
         <h3 className="text-sm font-medium mb-2">
           Select Patterns to Display:
         </h3>

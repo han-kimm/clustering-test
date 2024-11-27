@@ -78,6 +78,9 @@ const CityComparisonChart = () => {
 
   return (
     <div className="w-full h-96">
+      <h1 className="text-[28px] font-semibold mb-8">
+        Not Interested Pattern by City
+      </h1>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}

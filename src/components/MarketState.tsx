@@ -275,20 +275,16 @@ const StateAnalytics = () => {
 
   return (
     <div className="w-full p-4 bg-gray-50">
-      <h2 className="text-[28px] font-bold mb-6 text-center">
-        Speech Outside Variable Dashboard
-      </h2>
-
       <div className="space-y-8">
         <div className="bg-white rounded-lg shadow p-4">
-          <h3 className="text-lg font-semibold mb-4">
+          <h3 className="text-[28px] font-semibold mb-4">
             State Distribution Comparison
           </h3>
           <BarChartComponent />
         </div>
 
         <div className="bg-white rounded-lg shadow p-4">
-          <h3 className="text-lg font-semibold mb-4">
+          <h3 className="text-[28px] font-semibold mb-4">
             State Distribution by Group
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
