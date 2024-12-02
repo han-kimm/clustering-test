@@ -8,6 +8,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 ChartJS.register(PointElement, LinearScale, Tooltip, Legend);
 
@@ -61,51 +63,100 @@ function ScatterTranscript({
     text: string;
     stage: string;
     pattern: string[];
+    id: string;
   }[];
 }) {
-  if (!data) {
-    return null;
-  }
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [searchResults, setSearchResults] = useState<
+    { id: string; cosineSimilarity: number; group: string }[]
+  >([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const searchParam = useSearchParams();
 
-  console.log(data);
+  const handleSearch = async () => {
+    const searchQuery = inputRef.current?.value;
+
+    if (!searchQuery) {
+      return;
+    }
+
+    setIsSearching(true);
+    try {
+      const response = await fetch(
+        `http://localhost:8000/similarity?q=${searchQuery}&p=${searchParam.get(
+          "category"
+        )}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const results = await response.json();
+
+      setSearchResults(results);
+    } catch (error) {
+      console.error("Search failed:", error);
+    } finally {
+      setIsSearching(false);
+    }
+  };
 
   // Group data by both group and stage
-  const groupedData = data.reduce((acc, curr) => {
-    const key = `${curr.group}-${curr.stage}`;
-    if (!acc[key]) {
-      acc[key] = [];
-    }
-    acc[key].push({
-      x: curr.x,
-      y: curr.y,
-      text: curr.text,
-      stage: curr.stage,
-      pattern: curr.pattern,
-    });
-    return acc;
-  }, {} as Record<string, { x: number; y: number; text: string; stage: string; pattern: string[] }[]>);
+  const groupedData = useMemo(
+    () =>
+      data.reduce((acc, curr) => {
+        const key = `${curr.group}-${curr.stage}`;
+        if (!acc[key]) {
+          acc[key] = [];
+        }
 
-  // Create datasets with different colors and symbols for each group-stage combination
-  const datasets = {
-    datasets: Object.entries(groupedData).map(([key, points]) => {
-      const [group, stage] = key.split("-");
-      const stageColor = stageColors[group as keyof typeof stageColors] || {
-        base: "156, 163, 175",
-        symbol: "●",
-      };
+        acc[key].push({
+          x: curr.x,
+          y: curr.y,
+          text: curr.text,
+          stage: curr.stage,
+          group: curr.group,
+          pattern: curr.pattern,
+          id: curr.id,
+        });
+        return acc;
+      }, {} as Record<string, { x: number; y: number; text: string; stage: string; pattern: string[]; id: string; group: string }[]>),
+    [searchResults]
+  );
 
-      return {
-        label: `${group} (${stage})`,
-        data: points,
-        backgroundColor: `rgba(${stageColor.base}, ${
-          group === "group1" ? "0.7" : "0.5"
-        })`,
-        borderColor: `rgba(${stageColor.base}, 1)`,
-        pointRadius: 8,
-        pointStyle: stageColor.symbol,
-      };
+  const datasets = useMemo(
+    () => ({
+      datasets: Object.entries(groupedData).map(([key, points]) => {
+        const [group] = key.split("-");
+        const stageColor = stageColors[group as keyof typeof stageColors] || {
+          base: "156, 163, 175",
+          symbol: "●",
+        };
+
+        return {
+          label: group,
+          data: points,
+          backgroundColor: points.map((point) =>
+            searchResults.some((r) => r.id === point.id)
+              ? `rgba(${stageColor.base}, 0.8)`
+              : searchResults.length > 0
+              ? `rgba(${stageColor.base}, 0)`
+              : `rgba(${stageColor.base}, 0.1)`
+          ),
+          borderColor: points.map((point) =>
+            searchResults.some((r) => r.id === point.id)
+              ? "rgba(255, 255, 0, 1)"
+              : `rgba(${stageColor.base}, 0.1)`
+          ),
+          pointRadius: 8,
+          pointStyle: stageColor.symbol,
+        };
+      }),
     }),
-  };
+    [searchResults]
+  );
 
   const options = {
     responsive: true,
@@ -146,21 +197,62 @@ function ScatterTranscript({
         padding: 12,
         callbacks: {
           label: function (context: any) {
-            const { stage, text, pattern } = context.raw;
+            const { stage, text, pattern, group } = context.raw;
             console.log(context.raw);
             return stage
               ? [`Stage: ${stage}`, `Transcript: ${text}`]
               : pattern
               ? [`Patterns: ${pattern.join(`\n`)}`, `Transcript: ${text}`]
-              : [`Sentence: ${text}`];
+              : [`Sentence: ${text}`, `Group: ${group}`];
           },
         },
       },
     },
   };
 
+  const group1Length = searchResults.filter((r) => r.group === "group1").length;
+  const group2Length = searchResults.filter((r) => r.group === "group2").length;
+  const group3Length = searchResults.filter((r) => r.group === "group3").length;
+
   return (
-    <div className="w-full h-96">
+    <div className="w-full h-[1800px]">
+      <div className="flex space-x-2 w-80 mx-auto">
+        <input
+          type="text"
+          ref={inputRef}
+          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+          placeholder="Enter search query..."
+          className="flex-1 p-2 rounded border border-gray-300 bg-white text-gray-900"
+        />
+        <button
+          onClick={handleSearch}
+          disabled={isSearching}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-400"
+        >
+          {isSearching ? "Searching..." : "Search"}
+        </button>
+      </div>
+      <p className="w-40 mx-auto mt-4">그룹 별 검색 결과 개수</p>
+      <div className="w-80 mx-auto flex">
+        <span
+          className="bg-[#8884d8] px-2 py-1 text-black font-bold inline-block text-center"
+          style={{ width: `${group1Length * 3}px` }}
+        >
+          {group1Length}
+        </span>
+        <span
+          className="bg-[#82ca9d] px-2 py-1 text-black font-bold inline-block text-center"
+          style={{ width: `${group2Length * 3}px` }}
+        >
+          {group2Length}
+        </span>
+        <span
+          className="bg-[#ffc658] px-2 py-1 text-black font-bold inline-block text-center"
+          style={{ width: `${group3Length * 3}px` }}
+        >
+          {group3Length}
+        </span>
+      </div>
       <Scatter data={datasets} options={options} />
     </div>
   );

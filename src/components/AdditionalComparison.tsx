@@ -16,6 +16,7 @@ import {
 } from "recharts";
 import CityComparisonChart from "./NotInterestedCity";
 import Group3Top3City from "./Group3Top3";
+import SentimentComparison from "./SentimentComparison";
 
 // 데이터 정의
 const groupData: Record<string, Record<string, Record<string, number>>> = {
@@ -431,6 +432,7 @@ const AdditionalComparison = () => {
           />
         </div>
         <CityComparisonChart />
+        <SentimentComparison />
         <Group3Top3City />
 
         <div className="bg-white rounded-lg shadow">
