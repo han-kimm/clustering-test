@@ -423,9 +423,9 @@ const CategoryPieCharts = () => {
 
 const AdditionalComparison = () => {
   return (
-    <div className="w-full p-4 bg-gray-50">
+    <div className="w-full p-4">
       <div className="space-y-8">
-        <div className="bg-white rounded-lg shadow">
+        <div className="bg-white">
           <ComparisonBarChart
             title="City Distribution Comparison"
             type="market"
@@ -435,7 +435,11 @@ const AdditionalComparison = () => {
         <SentimentComparison />
         <Group3Top3City />
 
-        <div className="bg-white rounded-lg shadow">
+        <h1 className="text-[32px] py-8 text-center">
+          2. Lead Status Research
+        </h1>
+
+        <div className="bg-white">
           <ComparisonBarChart
             title="Status Distribution Comparison"
             type="status"
@@ -445,7 +449,7 @@ const AdditionalComparison = () => {
           Group 1 : VoiceMail 1 <br /> Group 2 : New
           <br /> Group 3 : Got Invoice
         </p>
-        <div className="bg-white rounded-lg shadow">
+        <div className="bg-white">
           <CategoryPieCharts />
         </div>
         <p className="text-[20px] bg-gray-100 rounded-md text-center whitespace-pre-line mb-4 p-2">
