@@ -1,5 +1,11 @@
+"use client";
+
+import SeniorAMComparison from "@/components/DivideSeniorFollowUp";
 import QuartileComparison from "@/components/FollowupQuarter";
 import FollowUpRatio from "@/components/FollowupRatio";
+import StatusFollowupChart from "@/components/StatusFollowup";
+import StatusRadarComparison from "@/components/StatusRader";
+import TeamPerformance from "@/components/TeamFollowUp";
 
 const FollowUpPage = () => {
   return (
@@ -12,8 +18,8 @@ const FollowUpPage = () => {
           Follow-up Check 방법 :
           <span className="bg-gray-200 p-1 rounded ">Voicemail ?</span>→
           <span className="bg-gray-200 p-1 rounded ">Callback Schedule ?</span>→
-          <span className="bg-gray-200 p-1 rounded ">Call log ?</span>→
-          <span className="bg-gray-200 p-1 rounded ">Follow-up</span>
+          <span className="bg-gray-200 p-1 rounded ">After Call log ?</span>→
+          <span className="bg-gray-200 p-1 rounded ">Verify Follow-up</span>
         </div>
         <div className="text-[18px] mb-8">
           표본 수집 기간: 11.03 - 11.08
@@ -27,15 +33,22 @@ const FollowUpPage = () => {
         </div>
       </div>
       <hr className="w-full my-4" />
-      <h1 className="text-[28px] mr-auto ml-8 my-8 bg-gray-600 text-white rounded px-2">
-        사분위수 분석
-      </h1>
+      <h1 className="text-[30px] my-8 font-semibold">1. 사분위수 분석</h1>
       <QuartileComparison />
       <hr className="w-full my-4" />
-      <h1 className="text-[28px] mr-auto ml-8 my-8 bg-gray-600 text-white rounded px-2">
-        상관 관계 분석
-      </h1>
+      <h1 className="text-[30px] my-8 font-semibold">2. 상관 관계 분석</h1>
       <FollowUpRatio />
+      <h1 className="text-[30px] my-8 font-semibold">3. Team & FollowUp</h1>
+      <TeamPerformance />
+      <h1 className="text-[30px] my-8 font-semibold">
+        4. Years of Service & FollowUp
+      </h1>
+      <StatusFollowupChart />
+      <StatusRadarComparison />
+      <h1 className="text-[30px] my-8 font-semibold">
+        5. Senior AM & Others Comparison
+      </h1>
+      <SeniorAMComparison />
     </div>
   );
 };
