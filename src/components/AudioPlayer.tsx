@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect, ChangeEvent } from "react";
 import { Play, Pause, Volume2, VolumeX } from "lucide-react";
 
-const AudioPlayer = ({ url = "https://example.com/audio.mp3" }) => {
+const AudioPlayer = ({ url }: { url: string }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);

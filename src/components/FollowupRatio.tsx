@@ -1,17 +1,14 @@
 "use client";
 
-import React from "react";
 import {
-  ScatterChart,
+  CartesianGrid,
+  ComposedChart,
+  Line,
+  ResponsiveContainer,
   Scatter,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  Line,
-  ComposedChart,
 } from "recharts";
 
 const FollowUpRatio = () => {
