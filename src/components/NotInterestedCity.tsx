@@ -30,11 +30,11 @@ const CityComparisonChart = () => {
       city: "Denver",
       Group1: 22.7,
       Group2: 23.6,
-      Group3: 3.4,
+      Group3: 0,
     },
     {
       city: "Miami",
-      Group1: 42.8,
+      Group1: 0,
       Group2: 0,
       Group3: 7.4,
     },
@@ -47,32 +47,8 @@ const CityComparisonChart = () => {
     {
       city: "Pittsburgh",
       Group1: 36.5,
-      Group2: 16.2,
-      Group3: 0,
-    },
-    {
-      city: "Austin",
-      Group1: 0,
-      Group2: 14.2,
-      Group3: 0,
-    },
-    {
-      city: "Houston",
-      Group1: 29.1,
-      Group2: 9.5,
-      Group3: 40,
-    },
-    {
-      city: "Phoenix",
-      Group1: 16.6,
       Group2: 0,
-      Group3: 12.5,
-    },
-    {
-      city: "Orlando",
-      Group1: 14.2,
-      Group2: 0,
-      Group3: 16.6,
+      Group3: 0,
     },
   ].filter((city) => city.Group1 > 0 || city.Group2 > 0 || city.Group3 > 0); // Filter out cities with all zeros
 

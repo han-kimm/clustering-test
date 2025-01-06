@@ -11,6 +11,8 @@ import {
   Legend,
   ResponsiveContainer,
   Label,
+  LineChart,
+  Line,
 } from "recharts";
 
 const QuartileComparison = () => {
@@ -107,7 +109,7 @@ const QuartileComparison = () => {
           </div>
           <div className="h-96">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart
+              <LineChart
                 data={data}
                 margin={{ top: 20, right: 30, left: 40, bottom: 50 }}
               >
@@ -137,14 +139,15 @@ const QuartileComparison = () => {
                   }}
                 />
                 {metric.bars.map((bar, i) => (
-                  <Bar
+                  <Line
                     key={i}
                     dataKey={bar.dataKey}
                     name={bar.name}
-                    fill={bar.color}
+                    stroke={bar.color}
+                    strokeWidth={3}
                   />
                 ))}
-              </BarChart>
+              </LineChart>
             </ResponsiveContainer>
           </div>
         </div>

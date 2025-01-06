@@ -489,7 +489,7 @@ function PatternPage() {
         domain={[0, 20]}
       />
       <PatternComparison
-        title="Referral"
+        title="Refusal"
         data={referralData}
         description={
           "*Group 3*은 Not Interested가 가장 적으면서, Sales Speech Referral이 가장 높음\nNot Interested = 아예 관심 없어요. = 추가 영업 시도 어려움\nSales Referral = 지금도 충분해요. = 추가 영업 시도 가능"

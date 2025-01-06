@@ -15,8 +15,8 @@ const SentimentComparison = () => {
 
   const group1: Record<string, Record<string, number>> = {
     Dallas: { negative: 12.5, positive: 4.1 },
-    Denver: { negative: 18.1, positive: 9.0 },
     "San Antonio": { negative: 10.9, positive: 10.9 },
+    Denver: { negative: 18.1, positive: 9.0 },
     Pittsburgh: { negative: 17.3, positive: 9.6 },
   };
 
@@ -25,20 +25,20 @@ const SentimentComparison = () => {
     Denver: { negative: 14.9, positive: 8.6 },
     "San Antonio": { negative: 11.4, positive: 11.4 },
     Louisville: { negative: 3.8, positive: 5.4 },
-    Austin: { negative: 10.7, positive: 5.3 },
   };
 
   const group3: Record<string, Record<string, number>> = {
     Dallas: { negative: 10.4, positive: 8.1 },
     "San Antonio": { negative: 12.6, positive: 11.3 },
+    Denver: {},
     Miami: { negative: 4.9, positive: 9.8 },
   };
 
   const prepareData = () => {
     const allCities = new Set([
-      ...Object.keys(group1),
-      ...Object.keys(group2),
       ...Object.keys(group3),
+      ...Object.keys(group2),
+      ...Object.keys(group1),
     ]);
 
     return Array.from(allCities).map((city) => {

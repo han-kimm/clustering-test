@@ -72,7 +72,7 @@ function Dialog({ data }: { data: any }) {
   return (
     <div className="w-full flex flex-col items-center">
       <AudioPlayer url={data.publicFilePath} />
-      <div className="w-full max-h-80 p-4 space-y-4 overflow-y-auto">
+      <div className="w-full max-h-96 p-4 space-y-4 overflow-y-auto">
         {messages.map((message, index) => (
           <div
             key={index}
