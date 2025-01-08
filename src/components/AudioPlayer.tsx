@@ -3,10 +3,15 @@
 import React, { useState, useRef, useEffect, ChangeEvent } from "react";
 import { Play, Pause, Volume2, VolumeX } from "lucide-react";
 
-const AudioPlayer = ({ url }: { url: string }) => {
+const AudioPlayer = (props: {
+  url: string;
+  focusTime?: [number];
+  onTimeUpdate?: (time: number) => void;
+}) => {
+  const { url, focusTime, onTimeUpdate } = props;
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
+  const [currentTime, setCurrentTime] = useState(focusTime ? focusTime[0] : 0);
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -14,19 +19,42 @@ const AudioPlayer = ({ url }: { url: string }) => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    audio.addEventListener("loadedmetadata", () => {
+    const handleLoading = () => {
+      console.log("loadedmetadata");
       setDuration(audio.duration);
-    });
+    };
 
-    audio.addEventListener("timeupdate", () => {
+    const handleTimeUpdate = () => {
       setCurrentTime(audio.currentTime);
-    });
+      onTimeUpdate?.(audio.currentTime);
+    };
+
+    const handleEnded = () => {
+      setIsPlaying(false);
+    };
+
+    audio.addEventListener("loadedmetadata", handleLoading);
+    audio.addEventListener("timeupdate", handleTimeUpdate);
+    audio.addEventListener("ended", handleEnded);
 
     return () => {
-      audio.removeEventListener("loadedmetadata", () => {});
-      audio.removeEventListener("timeupdate", () => {});
+      audio.removeEventListener("loadedmetadata", handleLoading);
+      audio.removeEventListener("timeupdate", handleTimeUpdate);
+      audio.removeEventListener("ended", handleEnded);
     };
   }, []);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (focusTime) {
+      audio.currentTime = focusTime[0];
+      audio.play();
+      setCurrentTime(focusTime[0]);
+      setIsPlaying(true);
+    }
+  }, [focusTime]);
 
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
